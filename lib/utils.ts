@@ -1,8 +1,8 @@
 /* eslint-disable no-prototype-builtins */
-import { type ClassValue, clsx } from "clsx";
-import qs from "query-string";
-import { twMerge } from "tailwind-merge";
-import { z } from "zod";
+import { type ClassValue, clsx } from 'clsx';
+import qs from 'query-string';
+import { twMerge } from 'tailwind-merge';
+import { z } from 'zod';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -11,50 +11,50 @@ export function cn(...inputs: ClassValue[]) {
 // FORMAT DATE TIME
 export const formatDateTime = (dateString: Date) => {
   const dateTimeOptions: Intl.DateTimeFormatOptions = {
-    weekday: "short", // abbreviated weekday name (e.g., 'Mon')
-    month: "short", // abbreviated month name (e.g., 'Oct')
-    day: "numeric", // numeric day of the month (e.g., '25')
-    hour: "numeric", // numeric hour (e.g., '8')
-    minute: "numeric", // numeric minute (e.g., '30')
+    weekday: 'short', // abbreviated weekday name (e.g., 'Mon')
+    month: 'short', // abbreviated month name (e.g., 'Oct')
+    day: 'numeric', // numeric day of the month (e.g., '25')
+    hour: 'numeric', // numeric hour (e.g., '8')
+    minute: 'numeric', // numeric minute (e.g., '30')
     hour12: true, // use 12-hour clock (true) or 24-hour clock (false)
   };
 
   const dateDayOptions: Intl.DateTimeFormatOptions = {
-    weekday: "short", // abbreviated weekday name (e.g., 'Mon')
-    year: "numeric", // numeric year (e.g., '2023')
-    month: "2-digit", // abbreviated month name (e.g., 'Oct')
-    day: "2-digit", // numeric day of the month (e.g., '25')
+    weekday: 'short', // abbreviated weekday name (e.g., 'Mon')
+    year: 'numeric', // numeric year (e.g., '2023')
+    month: '2-digit', // abbreviated month name (e.g., 'Oct')
+    day: '2-digit', // numeric day of the month (e.g., '25')
   };
 
   const dateOptions: Intl.DateTimeFormatOptions = {
-    month: "short", // abbreviated month name (e.g., 'Oct')
-    year: "numeric", // numeric year (e.g., '2023')
-    day: "numeric", // numeric day of the month (e.g., '25')
+    month: 'short', // abbreviated month name (e.g., 'Oct')
+    year: 'numeric', // numeric year (e.g., '2023')
+    day: 'numeric', // numeric day of the month (e.g., '25')
   };
 
   const timeOptions: Intl.DateTimeFormatOptions = {
-    hour: "numeric", // numeric hour (e.g., '8')
-    minute: "numeric", // numeric minute (e.g., '30')
+    hour: 'numeric', // numeric hour (e.g., '8')
+    minute: 'numeric', // numeric minute (e.g., '30')
     hour12: true, // use 12-hour clock (true) or 24-hour clock (false)
   };
 
   const formattedDateTime: string = new Date(dateString).toLocaleString(
-    "en-US",
+    'en-US',
     dateTimeOptions
   );
 
   const formattedDateDay: string = new Date(dateString).toLocaleString(
-    "en-US",
+    'en-US',
     dateDayOptions
   );
 
   const formattedDate: string = new Date(dateString).toLocaleString(
-    "en-US",
+    'en-US',
     dateOptions
   );
 
   const formattedTime: string = new Date(dateString).toLocaleString(
-    "en-US",
+    'en-US',
     timeOptions
   );
 
@@ -67,9 +67,9 @@ export const formatDateTime = (dateString: Date) => {
 };
 
 export function formatAmount(amount: number): string {
-  const formatter = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
+  const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
     minimumFractionDigits: 2,
   });
 
@@ -79,7 +79,7 @@ export function formatAmount(amount: number): string {
 export const parseStringify = (value: any) => JSON.parse(JSON.stringify(value));
 
 export const removeSpecialCharacters = (value: string) => {
-  return value.replace(/[^\w\s]/gi, "");
+  return value.replace(/[^\w\s]/gi, '');
 };
 
 interface UrlQueryParams {
@@ -104,28 +104,28 @@ export function formUrlQuery({ params, key, value }: UrlQueryParams) {
 
 export function getAccountTypeColors(type: AccountTypes) {
   switch (type) {
-    case "depository":
+    case 'depository':
       return {
-        bg: "bg-blue-25",
-        lightBg: "bg-blue-100",
-        title: "text-blue-900",
-        subText: "text-blue-700",
+        bg: 'bg-blue-25',
+        lightBg: 'bg-blue-100',
+        title: 'text-blue-900',
+        subText: 'text-blue-700',
       };
 
-    case "credit":
+    case 'credit':
       return {
-        bg: "bg-success-25",
-        lightBg: "bg-success-100",
-        title: "text-success-900",
-        subText: "text-success-700",
+        bg: 'bg-success-25',
+        lightBg: 'bg-success-100',
+        title: 'text-success-900',
+        subText: 'text-success-700',
       };
 
     default:
       return {
-        bg: "bg-green-25",
-        lightBg: "bg-green-100",
-        title: "text-green-900",
-        subText: "text-green-700",
+        bg: 'bg-green-25',
+        lightBg: 'bg-green-100',
+        title: 'text-green-900',
+        subText: 'text-green-700',
       };
   }
 }
@@ -171,7 +171,7 @@ export function countTransactionCategories(
 
 export function extractCustomerIdFromUrl(url: string) {
   // Split the URL string by '/'
-  const parts = url.split("/");
+  const parts = url.split('/');
 
   // Extract the last part, which represents the customer ID
   const customerId = parts[parts.length - 1];
@@ -192,20 +192,44 @@ export const getTransactionStatus = (date: Date) => {
   const twoDaysAgo = new Date(today);
   twoDaysAgo.setDate(today.getDate() - 2);
 
-  return date > twoDaysAgo ? "Processing" : "Success";
+  return date > twoDaysAgo ? 'Processing' : 'Success';
 };
 
-export const authFormSchema = (type: string) => z.object({
-  // sign up
-  firstName: type === 'sign-in' ? z.string().optional() : z.string().min(3),
-  lastName: type === 'sign-in' ? z.string().optional() : z.string().min(3),
-  address1: type === 'sign-in' ? z.string().optional() : z.string().max(50),
-  city: type === 'sign-in' ? z.string().optional() : z.string().max(50),
-  state: type === 'sign-in' ? z.string().optional() : z.string().min(2).max(2),
-  postalCode: type === 'sign-in' ? z.string().optional() : z.string().min(3).max(6),
-  dateOfBirth: type === 'sign-in' ? z.string().optional() : z.string().min(3),
-  ssn: type === 'sign-in' ? z.string().optional() : z.string().min(3),
-  // both
-  email: z.string().email(),
+export const signInFormSchema = z.object({
+  emails: z.string().email(),
   password: z.string().min(8),
-})
+});
+
+export const signUpFormSchema = z.object({
+  firstName: z
+    .string()
+    .min(3, { message: 'First name must be at least 3 characters long' }),
+  lastName: z
+    .string()
+    .min(3, { message: 'Last name must be at least 3 characters long' }),
+  address1: z
+    .string()
+    .max(50, { message: 'Address must not exceed 50 characters' }),
+  city: z
+    .string()
+    .max(50, { message: 'City name must not exceed 50 characters' }),
+  state: z
+    .string()
+    .min(2, { message: 'State code must be 2 characters long' })
+    .max(2, { message: 'State code must be 2 characters long' }),
+  postalCode: z
+    .string()
+    .min(3, { message: 'Postal code must be at least 3 characters long' })
+    .max(6, { message: 'Postal code cannot exceed 6 characters' }),
+  dateOfBirth: z.string().min(3, { message: 'Date of birth must be provided' }),
+  ssn: z.string().min(3, { message: 'SSN must be at least 3 characters long' }),
+  email: z.string().email({ message: 'Invalid email format' }),
+  password: z
+    .string()
+    .min(8, { message: 'Password must be at least 8 characters long' }),
+});
+
+export const loginFormSchema = z.object({
+  email: z.string().email({ message: 'Invalid email format' }),
+  password: z.string({ message: 'Password is required' }),
+});
