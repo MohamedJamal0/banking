@@ -26,7 +26,7 @@ declare type LoginUser = {
 };
 
 declare type User = {
-  $id: string;
+  id: string;
   email: string;
   userId: string;
   dwollaCustomerUrl: string;
@@ -59,7 +59,7 @@ declare type Account = {
   name: string;
   type: string;
   subtype: string;
-  appwriteItemId: string;
+  bankId: string;
   shareableId: string;
 };
 
@@ -83,23 +83,23 @@ declare type Transaction = {
 };
 
 declare type Bank = {
-  $id: string;
+  _id: string;
   accountId: string;
   bankId: string;
   accessToken: string;
   fundingSourceUrl: string;
-  userId: string;
+  user: string;
   shareableId: string;
 };
 
 declare type AccountTypes =
-  | "depository"
-  | "credit"
-  | "loan "
-  | "investment"
-  | "other";
+  | 'depository'
+  | 'credit'
+  | 'loan '
+  | 'investment'
+  | 'other';
 
-declare type Category = "Food and Drink" | "Travel" | "Transfer";
+declare type Category = 'Food and Drink' | 'Travel' | 'Transfer';
 
 declare type CategoryCount = {
   name: string;
@@ -145,12 +145,10 @@ declare interface CreditCardProps {
 
 declare interface BankInfoProps {
   account: Account;
-  appwriteItemId?: string;
-  type: "full" | "card";
 }
 
 declare interface HeaderBoxProps {
-  type?: "title" | "greeting";
+  type?: 'title' | 'greeting';
   title: string;
   subtext: string;
   user?: string;
@@ -175,7 +173,7 @@ declare interface PaginationProps {
 
 declare interface PlaidLinkProps {
   user: User;
-  variant?: "primary" | "ghost";
+  variant?: 'primary' | 'ghost';
   dwollaCustomerId?: string;
 }
 
@@ -189,7 +187,7 @@ declare interface PlaidLinkProps {
 // };
 
 declare interface AuthFormProps {
-  type: "sign-in" | "sign-up";
+  type: 'sign-in' | 'sign-up';
 }
 
 declare interface BankDropdownProps {
@@ -211,7 +209,7 @@ declare interface TotalBalanceBoxProps {
 
 declare interface FooterProps {
   user: User;
-  type?: 'mobile' | 'desktop'
+  type?: 'mobile' | 'desktop';
 }
 
 declare interface RightSidebarProps {
@@ -227,7 +225,7 @@ declare interface SiderbarProps {
 declare interface RecentTransactionsProps {
   accounts: Account[];
   transactions: Transaction[];
-  appwriteItemId: string;
+  currentBank: string;
   page: number;
 }
 
@@ -241,7 +239,7 @@ declare interface CategoryBadgeProps {
 }
 
 declare interface TransactionTableProps {
-  transactions: Transaction[];
+  currentBank: string;
 }
 
 declare interface CategoryProps {
@@ -262,7 +260,7 @@ declare interface getAccountsProps {
 }
 
 declare interface getAccountProps {
-  appwriteItemId: string;
+  bankId: string;
 }
 
 declare interface getInstitutionProps {
@@ -270,7 +268,7 @@ declare interface getInstitutionProps {
 }
 
 declare interface getTransactionsProps {
-  accessToken: string;
+  bankId: string;
 }
 
 declare interface CreateFundingSourceOptions {
@@ -310,8 +308,7 @@ declare interface exchangePublicTokenProps {
 
 declare interface createBankAccountProps {
   accessToken: string;
-  userId: string;
-  accountId: string;
+  user: string;
   bankId: string;
   fundingSourceUrl: string;
   shareableId: string;
@@ -322,9 +319,19 @@ declare interface getBanksProps {
 }
 
 declare interface getBankProps {
-  documentId: string;
+  bankId: string;
 }
 
 declare interface getBankByAccountIdProps {
   accountId: string;
+}
+
+declare interface SessionData {
+  user: {
+    id: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+  };
+  isLoggedIn: boolean;
 }
